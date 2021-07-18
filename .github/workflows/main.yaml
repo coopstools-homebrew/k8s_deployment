@@ -20,4 +20,7 @@ jobs:
       - name: Pull pods
         env:
           KUBECONFIG: k8s_config
-        run: kubectl get pods
+        run: |
+          kubectl apply -f users_api.yaml
+          kubectl apply -f users_app.yaml
+          kubectl apply -f users_ingress.yaml

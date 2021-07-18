@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: users-app
-          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_app:v0.0.1
+          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_app:v0.1.0
           resources:
             requests:
               memory: "128Mi"
@@ -39,6 +39,3 @@ spec:
               cpu: "300m"
           ports:
             - containerPort: 80
-          env:
-            - name: VUE_APP_API_URL
-              value: "http://home.coopstools.com/api"
