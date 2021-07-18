@@ -12,7 +12,10 @@ jobs:
       - name: Get pwd
         run: pwd
       - name: Pull k8s Credentials
-        run: curl -H "Authorization: Bearer {{ secrets.DIGITALOCEAN_API_TOKEN }}" https://api.digitalocean.com/v2/kubernetes/clusters/{{ secrets.DIGITALOCEAN_K8S_CLUSTER_ID }}/kubeconfig > k8s_config
+        env:
+          TOKEN: {{ secrets.DIGITALOCEAN_API_TOKEN }}
+          K8S_ID: {{ secrets.DIGITALOCEAN_K8S_CLUSTER_ID }}
+        run: curl -H "Authorization: Bearer TOKEN" "https://api.digitalocean.com/v2/kubernetes/clusters/K8S_ID/kubeconfig" > k8s_config
       - name: Pull pods
         env:
           KUBECONFIG: k8s_config
