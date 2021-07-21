@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: users-app
-          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_app:v0.1.1
+          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_app:v0.1.2
           resources:
             requests:
               memory: "128Mi"
