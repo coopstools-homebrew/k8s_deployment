@@ -32,7 +32,7 @@ spec:
       serviceAccountName: namespace-ctrl
       containers:
         - name: internal-kubectl
-          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/dev-environment-controller:v0.0.3
+          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/dev-environment-controller:v0.0.4
           ports:
             - containerPort: 8090
           env:
