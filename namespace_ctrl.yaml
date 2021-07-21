@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: namespace-api-svc
+  namespace: prod
+  labels:
+    app: namespace-api
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8090
+      protocol: TCP
+  selector:
+    app: namespace-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namespace-api
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: namespace-api
+  template:
+    metadata:
+      labels:
+        app: namespace-api
+    spec:
+      serviceAccountName: namespace-ctrl
+      containers:
+        - name: internal-kubectl
+          image: ghcr.io/coopstools-homebrew/coopstools-homebrew/dev-environment-controller:v0.0.1
+          ports:
+            - containerPort: 8090
+          env:
+            - name: PORT
+              value: "8090"

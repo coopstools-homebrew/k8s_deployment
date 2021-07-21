@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: namespace-ctrl
+  namespace: prod
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: modify-namespace
+  namespace: prod
+rules:
+  - apiGroups: [""]
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: modify-namespace-to-sa
+  namespace: prod
+subjects:
+  - kind: ServiceAccount
+    name: namespace-ctrl
+    namespace: prod
+roleRef:
+  kind: ClusterRole
+  name: modify-namespace
+  apiGroup: rbac.authorization.k8s.io

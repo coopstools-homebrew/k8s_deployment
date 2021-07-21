@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: users-ingress
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$1
@@ -22,5 +23,12 @@ spec:
         backend:
           service:
             name: users-api-svc
+            port:
+              number: 80
+      - path: /namespace/(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: namespace-api-svc
             port:
               number: 80

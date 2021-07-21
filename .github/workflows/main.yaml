@@ -17,10 +17,13 @@ jobs:
           K8S_ID: ${{ secrets.DIGITALOCEAN_K8S_CLUSTER_ID }}
         run: |
           curl -H "Authorization: Bearer $TOKEN" "https://api.digitalocean.com/v2/kubernetes/clusters/$K8S_ID/kubeconfig" > k8s_config
-      - name: Pull pods
+      - name: Apply k8s scripts
         env:
           KUBECONFIG: k8s_config
         run: |
+          kubectl apply -f namespace.yaml
+          kubectl apply -f namespace_ctrl_role.yaml
+          kubectl apply -f namespace_ctrl.yaml
           kubectl apply -f users_api.yaml
           kubectl apply -f users_app.yaml
           kubectl apply -f users_ingress.yaml
