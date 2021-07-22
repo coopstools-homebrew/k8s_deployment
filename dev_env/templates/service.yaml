@@ -1,0 +1,20 @@
+{{- $root := . -}}
+
+{{- range .Values.deployments }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-svc
+  namespace: {{ $root.Release.Name }}
+  labels:
+    app: {{ .name }}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: {{ .port | default 8080 }}
+      protocol: TCP
+  selector:
+    app: {{ .name }}
+{{- end }}
