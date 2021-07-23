@@ -3,14 +3,14 @@ pullPolicy: IfNotPresent
 deployments:
 - name: user-api
   image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_api
-  tag: v0.0.3
+  tag: v0.1.0
   path_prefix: "/api"
 - name: user-app
   image: ghcr.io/coopstools-homebrew/coopstools-homebrew/users_app
-  tag: v0.1.4
+  tag: v0.2.0
   port: 80
 - name: ns-ctrl
   image: ghcr.io/coopstools-homebrew/coopstools-homebrew/dev-environment-controller
-  tag: v0.0.4
-  path_prefix: "/ns"
+  tag: v0.1.0
+  path_prefix: "/namespace"
   service_account_name: ns-ctrl-svc-acc
