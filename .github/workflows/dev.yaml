@@ -12,9 +12,11 @@ jobs:
       - name: Get Helm Version
         run: helm version
       - name: Extract branch name
-        shell: bash
-        run: echo "##[set-env name=BRANCH_NAME;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "##[set-output name=BRANCH_NAME;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: Display branch name
+        env:
+          BRANCH_NAME: ${{ steps.extract_branch.output.BRANCH_NAME }}
         run: echo "The branch is " $BRANCH_NAME
       - name: Pull k8s Credentials
         env:
@@ -25,4 +27,5 @@ jobs:
       - name: Deploy with Helm
         env:
           KUBECONFIG: k8s_config
+          BRANCH_NAME: ${{ steps.extract_branch.output.BRANCH_NAME }}
         run: helm upgrade --install $BRANCH_NAME ./dev_env
