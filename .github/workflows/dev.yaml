@@ -19,8 +19,8 @@ jobs:
       - name: Display branch name
         env:
           QUALIFIED_BRANCH: ${{ github.ref }}
-          BRANCH_NAME: ${{ steps.extract_branch.output.BRANCH_NAME }}
-        run: echo "The branch is " $BRANCH_NAME " from " $QUALIFIED_BRANCH
+          BRANCH_NAME: ${{ steps.extract_branch.outputs.BRANCH_NAME }}
+        run: echo "The branch is $BRANCH_NAME from $QUALIFIED_BRANCH"
       - name: Pull k8s Credentials
         env:
           TOKEN: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
