@@ -31,4 +31,4 @@ jobs:
         env:
           KUBECONFIG: k8s_config
           BRANCH_NAME: ${{ steps.extract_branch.outputs.BRANCH_NAME }}
-        run: helm upgrade --install $BRANCH_NAME ./dev_env
+        run: helm upgrade --install $BRANCH_NAME ./helm_deploy

@@ -23,9 +23,9 @@ jobs:
         env:
           KUBECONFIG: k8s_config
         run: |
-          kubectl apply -f ./old_deploy/namespace.yaml
-          kubectl apply -f ./old_deploy/namespace_ctrl_role.yaml
-          kubectl apply -f ./old_deploy/namespace_ctrl.yaml
-          kubectl apply -f ./old_deploy/users_api.yaml
-          kubectl apply -f ./old_deploy/users_app.yaml
-          kubectl apply -f ./old_deploy/users_ingress.yaml
+          kubectl apply -f ./kubectl_deploy/namespace.yaml
+          kubectl apply -f ./kubectl_deploy/namespace_ctrl_role.yaml
+          kubectl apply -f ./kubectl_deploy/namespace_ctrl.yaml
+          kubectl apply -f ./kubectl_deploy/users_api.yaml
+          kubectl apply -f ./kubectl_deploy/users_app.yaml
+          kubectl apply -f ./kubectl_deploy/users_ingress.yaml
