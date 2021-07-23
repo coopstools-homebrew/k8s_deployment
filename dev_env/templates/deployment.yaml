@@ -1,0 +1,33 @@
+{{- $root := . -}}
+
+{{- range .Values.deployments }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+  namespace: {{ $root.Release.Name }}
+spec:
+  replicas: {{ $root.Values.replicaCount}}
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      {{- if .service_account_name }}
+      serviceAccountName: {{ .service_account_name }}
+      {{- end }}
+      containers:
+        - name: {{ .name }}
+          image: {{ .image }}:{{ .tag }}
+          ports:
+            - containerPort: {{ .port | default 8080 }}
+          env:
+            - name: PORT
+              value: {{ .port | default 8080 | quote }}
+            - name: URL_PATH_PREFIX
+              value: {{ $root.Release.Name }}
+{{- end }}
