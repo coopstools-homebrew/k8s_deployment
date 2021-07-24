@@ -6,7 +6,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: users-ingress
+  name: {{ $root.Release.Name }}-ingress-def
   namespace: {{ $root.Release.Name }}
   annotations:
     kubernetes.io/ingress.class: nginx

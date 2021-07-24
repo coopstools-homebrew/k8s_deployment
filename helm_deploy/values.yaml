@@ -3,7 +3,7 @@ pullPolicy: IfNotPresent
 deployments:
 - name: user-api
   image: ghcr.io/coopstools-homebrew/shadows-of-the-forgotten
-  tag: v1.0.0
+  tag: v1.0.1
   path_prefix: "/user"
 - name: user-app
   image: ghcr.io/coopstools-homebrew/elven-far-seeing-stone
