@@ -1,6 +1,6 @@
 {{- $root := . -}}
 {{- $envPrefix := print "/" $root.Release.Name -}}
-{{- if eq $envPrefix "main" -}}
+{{- if eq $envPrefix "/main" -}}
   {{- $envPrefix = "" -}}
 {{- end -}}
 apiVersion: networking.k8s.io/v1
