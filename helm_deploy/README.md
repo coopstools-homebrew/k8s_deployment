@@ -2,7 +2,7 @@
 
 This chart can be deployed by running the following command form the parent directory:
 ```
-helm update --install <dev-env-name> ./dev_env
+helm upgrade --install <dev-env-name> ./helm_deploy
 ```
 
 ## templates

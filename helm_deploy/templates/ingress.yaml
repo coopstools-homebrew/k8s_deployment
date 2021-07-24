@@ -1,4 +1,8 @@
 {{- $root := . -}}
+{{- $envPrefix := print "/" $root.Release.Name -}}
+{{- if eq $envPrefix "main" -}}
+  {{- $envPrefix = "" -}}
+{{- end -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,14 +10,14 @@ metadata:
   namespace: {{ $root.Release.Name }}
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /{{ $root.Release.Name }}/$1
+    nginx.ingress.kubernetes.io/rewrite-target: {{ $envPrefix }}/$1
 spec:
   rules:
   - host: "home.coopstools.com"
     http:
       paths:
       {{- range .Values.deployments }}
-      - path: /{{ $root.Release.Name }}{{ .path_prefix }}/(.*)
+      - path: {{ $envPrefix }}{{ .path_prefix }}/(.*)
         pathType: Prefix
         backend:
           service:
