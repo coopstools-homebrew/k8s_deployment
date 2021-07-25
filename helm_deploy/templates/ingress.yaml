@@ -21,14 +21,13 @@ spec:
             name: {{ .name }}-svc
             port:
               number: 80
-      {{- if eq $envPrefix "/main" -}}
-      {{- if .path_prefix }}{{ else -}}
+      {{- if and (not .path_prefix) (eq $envPrefix "/main") }}
       - path: /
         pathType: Exact
         backend:
           service:
             name: {{ .name }}-svc
-            port: 80
-      {{- end -}}
-      {{- end -}}
+            port:
+              number: 80
+      {{- end }}
       {{- end -}}
