@@ -22,7 +22,7 @@ spec:
             port:
               number: 80
       {{- if eq $envPrefix "/main" -}}
-      {{- if eq .path_prefix "" -}}
+      {{- if .path_prefix }}{{ else -}}
       - path: /
         pathType: Exact
         backend:
