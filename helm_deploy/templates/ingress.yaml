@@ -1,8 +1,5 @@
 {{- $root := . -}}
 {{- $envPrefix := print "/" $root.Release.Name -}}
-{{- if eq $envPrefix "/main" -}}
-  {{- $envPrefix = "" -}}
-{{- end -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -24,4 +21,12 @@ spec:
             name: {{ .name }}-svc
             port:
               number: 80
+      {{- if $envPrefix eq "/main" -}}{{- if .path_prefix eq "" -}}
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: {{ .name }}-svc
+            port: 80
+      {{- end -}}{{- end -}}
       {{- end }}
