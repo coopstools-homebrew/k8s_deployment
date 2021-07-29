@@ -28,7 +28,8 @@ service_accounts:
   - list
   - delete
 - name: "node"
-  resource: node
+  resource: nodes
   resource_verbs:
   - top
+  - get
   - describe
