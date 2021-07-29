@@ -17,7 +17,7 @@ deployments:
 - name: the-federation
   image: ghcr.io/coopstools-homebrew/the-federation
   tag: v0.0.2
-  path_prefix: "./federation"
+  path_prefix: "/federation"
   service_account_name: node
 
 service_accounts:
