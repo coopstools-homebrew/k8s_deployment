@@ -8,6 +8,7 @@ metadata:
 rules:
   - apiGroups:
       - metrics.k8s.io
+      - ""
     resources:
       - {{ $acc.resource }}
     verbs:{{ range $verb := $acc.resource_verbs }}
@@ -28,6 +29,7 @@ subjects:
   - kind: ServiceAccount
     name: {{ $acc.name }}-ctrl-svc-acc
     namespace: {{ $root.Release.Name }}
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
   name: {{ $root.Release.Name }}-modify-{{ $acc.name }}
