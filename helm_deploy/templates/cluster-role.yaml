@@ -6,7 +6,7 @@ metadata:
   name: {{ $root.Release.Name }}-modify-{{ $acc.name }}
   namespace: dev
 rules:
-  - apiGroups: [{{ $acc.api_group | quotes }}]
+  - apiGroups: [{{ $acc.api_group | quote }}]
     resources:
       - {{ $acc.resource }}
     verbs:{{ range $verb := $acc.resource_verbs }}
