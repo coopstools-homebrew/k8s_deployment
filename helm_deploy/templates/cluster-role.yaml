@@ -6,7 +6,8 @@ metadata:
   name: {{ $root.Release.Name }}-modify-{{ $acc.name }}
   namespace: dev
 rules:
-  - apiGroups: [""]
+  - apiGroups:
+      - metrics.k8s.io
     resources:
       - {{ $acc.resource }}
     verbs:{{ range $verb := $acc.resource_verbs }}
