@@ -13,4 +13,22 @@ deployments:
   image: ghcr.io/coopstools-homebrew/binary-neutron-stars
   tag: v1.0.0
   path_prefix: "/ns"
-  service_account_name: ns-ctrl-svc-acc
+  service_account_name: ns
+- name: the-federation
+  image: ghcr.io/coopstools-homebrew/the-federation
+  tag: v0.0.2
+  path_prefix: "./federation"
+  service_account_name: node
+
+service_accounts:
+- name: "ns"
+  resource: namespaces
+  resource_verbs:
+  - get
+  - list
+  - delete
+- name: "node"
+  resource: node
+  resource_verbs:
+  - top
+  - describe

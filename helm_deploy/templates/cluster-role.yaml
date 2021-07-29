@@ -1,0 +1,35 @@
+{{- $root := . -}}
+{{ range $acc := .Values.service_accounts }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ $root.Release.Name }}-modify-{{ $acc.name }}
+  namespace: dev
+rules:
+  - apiGroups: [""]
+    resources:
+      - {{ $acc.resource }}
+    verbs:{{ range $verb := $acc.resource_verbs }}
+      - {{ $verb }}
+    {{- end }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $acc.name }}-ctrl-svc-acc
+  namespace: {{ $root.Release.Name }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: modify-{{ $acc.name }}-to-svc-acc-{{ $root.Release.Name }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $acc.name }}-ctrl-svc-acc
+    namespace: {{ $root.Release.Name }}
+roleRef:
+  kind: ClusterRole
+  name: {{ $root.Release.Name }}-modify-{{ $acc.name }}
+  apiGroup: rbac.authorization.k8s.io
+---
+{{- end }}
