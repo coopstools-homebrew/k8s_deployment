@@ -27,9 +27,11 @@ service_accounts:
   - get
   - list
   - delete
+  api_group: ""
 - name: "node"
   resource: nodes
   resource_verbs:
   - top
   - get
   - describe
+  api_group: "metrics.k8s.io"
