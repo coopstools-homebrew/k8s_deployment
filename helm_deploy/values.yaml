@@ -7,7 +7,7 @@ deployments:
   path_prefix: "/user"
 - name: user-app
   image: ghcr.io/coopstools-homebrew/elven-far-seeing-stone
-  tag: v1.0.0
+  tag: v1.1.0
   port: 80
 - name: ns-ctrl
   image: ghcr.io/coopstools-homebrew/binary-neutron-stars
