@@ -21,3 +21,13 @@ A simple nginx ingress four routing both by path and environment/namespace.
 
 ### ns_ctrl_role.yaml
 This template sets up the permissions needed for the namespace api to be able to access k8s. The `ClusterRole` contained in here is why the helm command above uses `update --install`, instead of just `install`. The `ClusterRole` exists outside of namespaces and is not deleted when the namespace is cleared out. If helm was run with `install`, there would be an error thrown saying `Error: cannot re-use a name that is still in use`. (unfortunately, the error fails to state what name is already in use)
+
+## Local testing
+
+```
+docker run -it --rm -v $(pwd)/.kube:/root/.kube -v $(pwd)/helm_scripts:/config  dtzar/helm-kubectl bash
+```
+
+```
+helm install --dry-run --debug dry-run-test ./helm_deploy
+```

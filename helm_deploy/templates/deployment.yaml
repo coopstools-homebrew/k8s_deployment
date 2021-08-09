@@ -18,7 +18,7 @@ spec:
         app: {{ .name }}
     spec:
       {{- if .service_account_name }}
-      serviceAccountName: {{ .service_account_name }}
+      serviceAccountName: {{ .service_account_name }}-ctrl-svc-acc
       {{- end }}
       containers:
         - name: {{ .name }}
