@@ -30,4 +30,6 @@ spec:
               value: {{ .port | default 8080 | quote }}
             - name: URL_PATH_PREFIX
               value: {{ $root.Release.Name }}
+      nodeSelector:
+        kubernetes.io/arch: amd64
 {{- end }}
