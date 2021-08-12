@@ -7,10 +7,31 @@ deployments:
   path_prefix: "/user"
 - name: user-app
   image: ghcr.io/coopstools-homebrew/elven-far-seeing-stone
-  tag: v1.0.0
+  tag: v1.1.0
   port: 80
 - name: ns-ctrl
   image: ghcr.io/coopstools-homebrew/binary-neutron-stars
   tag: v1.0.0
   path_prefix: "/ns"
-  service_account_name: ns-ctrl-svc-acc
+  service_account_name: ns
+- name: the-federation
+  image: ghcr.io/coopstools-homebrew/the-federation
+  tag: v0.0.5
+  path_prefix: "/federation"
+  service_account_name: node
+
+service_accounts:
+- name: "ns"
+  resource: namespaces
+  resource_verbs:
+  - get
+  - list
+  - delete
+- name: "node"
+  resource: nodes
+  resource_verbs:
+  - top
+  - get
+  - describe
+  - list
+  - watch
